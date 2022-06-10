@@ -1,10 +1,13 @@
 const express = require("express");
+const fs = require('fs');
 const app = express();
+
 const cors = require('cors')
 const PORT = 8000;
 
 app.use(cors())
 app.use(express.static('public'))
+
 
 const reviews = {
   andy: {
@@ -16,6 +19,20 @@ const reviews = {
     text: "Callum is great!",
   },
 };
+
+
+
+var jsonContent = JSON.stringify(reviews);
+console.log(jsonContent);
+ 
+fs.writeFile("reviews.json", jsonContent, 'utf8', function (err) {
+    if (err) {
+        console.log("An error occured while writing JSON Object to File.");
+        return console.log(err);
+    }
+ 
+    console.log("JSON file has been saved.");
+});
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
