@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Enter your guthub username:</p>
+    <form id="newUser" action="/addUser" method="POST">
+      <input id="username" />
+      <button type="submit">Submit</button>
+    </form>
+    <p id="result"></p>
+    <ul id="users">
+        <% for(let i=0; i < users.length; i++) {%>
+            <li class="user">
+                <span><%= users[i].user.name %> |</span>
+                <span><%= users[i].user.login%> |</span>
+                <span><%= users[i].reviews.length %> reviews</span>
+
+            </li>
+        <% } %> 
+       </ul>
+    <p>
+      Once you have added a user, you can find their info at
+      https://andy-hopkins-review-api.herokuapp.com/api/{user}
+    </p>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>

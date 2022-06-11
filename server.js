@@ -8,11 +8,14 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.static("public"));
 app.use(cors());
+app.set('view engine', 'ejs');
 
 let users = JSON.parse(fs.readFileSync("users.json"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  // res.sendFile(__dirname + "/index.html");
+  console.log(users)
+  res.render('index.ejs', {users : users})
 });
 
 app.get("/api/:name", (req, res) => {
