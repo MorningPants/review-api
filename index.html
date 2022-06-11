@@ -8,15 +8,25 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Reviews</h1>
-    <p>Please go to .../api/(name)</p>
+    <p>Enter your guthub username:</p>
+    <form id="newUser" action="/addUser" method="POST">
+        <input id="username">
+        <button type="submit">Submit</button>
+    </form>
+    <p id="result"></p>
+    <ul id="users">
+        <!-- Add users from users.json here -->
+    </ul>
+
+    <!-- The below is offline until we add the ability to post reviews -->
+    <!-- <h1>Reviews</h1> -->
+
+    <!-- <p>Please go to .../api/(name)</p>
     <p>(Try /andy or /callum)</p>
     <h2>-OR-</h2>
     <input type="text" placeholder="Search for reviews">
     <button>Get Reviews!</button>
     <h2>Reviews:</h2>
-    <p id="result"></p>
-    <script src="/js/main.js"></script>
     <hr>
     <h2> Add Review </h2>
     <form>
@@ -33,6 +43,8 @@
         <input type="radio" name="star" />5
         <br>
         <button>Submit Review</button>
-    </form>
+    </form> -->
+    
+    <script src="/js/main.js"></script>
 </body>
 </html>

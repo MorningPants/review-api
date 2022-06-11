@@ -1,38 +1,15 @@
 const express = require("express");
-const fs = require('fs');
+const cors = require("cors");
+const fs = require("fs");
 const app = express();
-
-const cors = require('cors')
 const PORT = 8000;
 
-app.use(cors())
-app.use(express.static('public'))
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.static("public"));
+app.use(cors());
 
-
-const reviews = {
-  andy: {
-    stars: 5,
-    text: "Andy is great!",
-  },
-  callum: {
-    stars: 5,
-    text: "Callum is great!",
-  },
-};
-
-
-
-var jsonContent = JSON.stringify(reviews);
-console.log(jsonContent);
- 
-fs.writeFile("reviews.json", jsonContent, 'utf8', function (err) {
-    if (err) {
-        console.log("An error occured while writing JSON Object to File.");
-        return console.log(err);
-    }
- 
-    console.log("JSON file has been saved.");
-});
+let users = JSON.parse(fs.readFileSync("users.json"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
@@ -40,15 +17,40 @@ app.get("/", (req, res) => {
 
 app.get("/api/:name", (req, res) => {
   const name = req.params.name;
-  if (reviews[name]){
-
-      res.json(reviews[name]);
-    }
-    else{
-        res.sendStatus('404')
-    }
+  var user = users.filter(obj => {
+    return obj.user.login.toLowerCase() === name
+  })
+  console.log(user)
+  if (user) {
+    res.json(user);
+  } else {
+    res.sendStatus("404");
+  }
 });
 
 app.listen(process.env.PORT || PORT, () => {
-  console.log(`The server is running on port ${PORT}.`);
+  console.log(`The server is running on ${process.env.PORT || PORT}.`);
+});
+
+app.post("/addUser", (request, response) => {
+
+  let newUser = request.body;
+  newUser.reviews = [];
+  console.log(newUser.user.login);
+
+  if (!users.some((e) => e.user.login === newUser.user.login)) {
+    users.push(newUser);
+    var jsonUsers = JSON.stringify(users);
+
+    fs.writeFile("users.json", jsonUsers, "utf8", function (err) {
+      if (err) {
+        console.log("An error occured while writing JSON Object to File.");
+        return console.log(err);
+      }
+
+      console.log("User has been added to the server filesystem.");
+    });
+  } else {
+    console.log("User already in system.");
+  }
 });
