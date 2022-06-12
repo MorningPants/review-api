@@ -1,7 +1,1 @@
-TODO: Continue Leon's vid to get the PUT input
-add dynamic html
-when a user is serched, display their info, check if they are in db, and ask to add.
-PUT on add, no reviews.
-List users from db on homepage
-option to write a review
-Mongo?
+This is-- or rather will be- an app that allows junior devs to recommend other junior devs that they've worked with to potential employers.  It will have the option of giving reviews to other users via their github account.  See the live version here https://andy-hopkins-review-api.herokuapp.com/
