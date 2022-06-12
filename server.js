@@ -31,6 +31,21 @@ app.get("/api/:name", (req, res) => {
   }
 });
 
+
+
+app.get("/users/:name", (req, res) => {
+  const name = req.params.name.toLowerCase();
+  var object = users.find(user => {
+    return user.user.login.toLowerCase() === name
+  })
+  console.log(object)
+  if (object) {
+    res.render('profile.ejs', {object : object})
+  } else {
+    res.sendStatus("404");
+  }
+})
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(`The server is running on ${process.env.PORT || PORT}.`);
 });
@@ -57,3 +72,7 @@ app.post("/addUser", (request, response) => {
     console.log("User already in system.");
   }
 });
+
+app.put("/addReview", (request, response) => {
+  console.log(request.body)
+})

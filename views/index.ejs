@@ -17,9 +17,11 @@
     <ul id="users">
         <% for(let i=0; i < users.length; i++) {%>
             <li class="user">
-                <span><%= users[i].user.name %> |</span>
-                <span><%= users[i].user.login%> |</span>
-                <span><%= users[i].reviews.length %> reviews</span>
+                <a href="/users/<%= users[i].user.login %>">
+                    <span><%= users[i].user.name %> |</span>
+                    <span><%= users[i].user.login%> |</span>
+                    <span><%= users[i].reviews.length %> review<% if (users[i].reviews.length !== 1) { %>s<% } %></span>
+                </a>
 
             </li>
         <% } %> 

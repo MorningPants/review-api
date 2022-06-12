@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Profile for <%= object.user.name %></h1>
+    <h2>Reviews</h2>
+    <% for(let i=0; i < object.reviews.length; i++) {%>
+    <span><%= object.reviews[i].stars%> stars:</span>
+    <span><%= object.reviews[i].text%></span>
+    <% } %>
+    <h2>Worked with <%= object.user.name %>? Give them a review!</h2>
+    <form id="review" action="/addReview" method="PUT">
+      <textarea name="review"></textarea>
+      <input type="radio" name="star" value="1" />
+      <input type="radio" name="star" value="2" />
+      <input type="radio" name="star" value="3" />
+      <input type="radio" name="star" value="4" />
+      <input type="radio" name="star" value="5" />
+      <button type="submit">Add Review!</button>
+    </form>
+  </body>
+</html>
